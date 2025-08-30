@@ -7,11 +7,9 @@
 
 body {
   font-family: "Roboto", sans-serif;
-  background: url("https://images.unsplash.com/photo-1754215683705-ee0a731d7288?q=80&w=1075&auto=format&fit=crop&ixlib=rb-4.1.0")
-    no-repeat center center / cover;
-  background-attachment: fixed;
   color: #333;
   line-height: 1.6;
+  background: #f4f6fc; /* light background for the whole site */
 }
 
 a {
@@ -28,8 +26,11 @@ a {
 
 /* === Header === */
 header {
-  background: #6c63ff;
-  color: #fff;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  color: #333;
   padding: 15px 0;
   position: sticky;
   top: 0;
@@ -40,32 +41,38 @@ header .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0;
+  padding: 0 20px;
 }
 
 header h1 {
   font-family: "Montserrat", sans-serif;
   font-size: 1.8rem;
   font-weight: 700;
+  color: #6c63ff;
 }
 
 header nav ul {
   list-style: none;
   display: flex;
+  gap: 25px;
 }
 
 header nav ul li {
-  margin-left: 20px;
+  margin: 0;
 }
 
 header nav a {
-  color: #fff;
+  color: #333;
   font-weight: 500;
-  transition: color 0.3s;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
 header nav a:hover {
-  text-decoration: underline;
+  background: #6c63ff;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
 }
 
 /* === Hero Section === */
@@ -77,6 +84,12 @@ header nav a:hover {
   text-align: center;
   color: #fff;
   padding: 0 20px;
+
+  /* Background with dark overlay */
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("https://images.unsplash.com/photo-1754215683705-ee0a731d7288?q=80&w=1075&auto=format&fit=crop&ixlib=rb-4.1.0")
+      no-repeat center center / cover;
+  background-attachment: fixed;
 }
 
 .hero-content h1 {
@@ -111,15 +124,11 @@ header nav a:hover {
 .features {
   text-align: center;
   padding: 60px 20px;
-  background: linear-gradient(
-    135deg,
-    #f9f9ff,
-    #e9e9ff
-  ); /* Soft gradient background */
+  background: #fdfdfd;
   border-radius: 15px;
   margin: 40px auto;
   max-width: 1200px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
 }
 
 .features h2 {
@@ -164,24 +173,16 @@ header nav a:hover {
   font-size: 0.95rem;
 }
 
-.card {
-  background: #fff;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-8px);
-}
-
 /* === About Section === */
 .about {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: 40px;
+  background: #fff;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .about img {
@@ -228,6 +229,10 @@ header nav a:hover {
 /* === Team Section === */
 .team {
   text-align: center;
+  background: #fff;
+  border-radius: 12px;
+  padding: 60px 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .team h2 {
@@ -283,6 +288,8 @@ header nav a:hover {
   text-align: center;
   padding: 60px 20px;
   border-radius: 15px;
+  margin: 40px auto;
+  max-width: 1200px;
 }
 
 .cta h2 {
