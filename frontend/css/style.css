@@ -109,9 +109,17 @@ header nav a:hover {
 
 /* === Features Section === */
 .features {
-  background: #fff;
   text-align: center;
-  border-radius: 12px;
+  padding: 60px 20px;
+  background: linear-gradient(
+    135deg,
+    #f9f9ff,
+    #e9e9ff
+  ); /* Soft gradient background */
+  border-radius: 15px;
+  margin: 40px auto;
+  max-width: 1200px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 .features h2 {
@@ -123,12 +131,37 @@ header nav a:hover {
 
 .features p {
   margin-bottom: 40px;
+  color: #555;
 }
 
 .feature-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
+}
+
+.feature-cards .card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-cards .card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.feature-cards .card h3 {
+  color: #6c63ff;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.feature-cards .card p {
+  color: #444;
+  font-size: 0.95rem;
 }
 
 .card {
