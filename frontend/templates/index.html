@@ -4,7 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MindEase - Personalized Mental Health Assistant</title>
-    <link rel="stylesheet" href="../css/style.css" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+
+    <!-- Google Fonts -->
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600&display=swap"
@@ -36,10 +40,10 @@
       <div class="hero-content">
         <h1>Welcome to MindEase</h1>
         <p>
-          Your personalized mental health assistant that helps you track
-          mood,reduce stress, and stay mindful every day.
+          Your personalized mental health assistant that helps you track mood,
+          reduce stress, and stay mindful every day.
         </p>
-        <a href="chatbot.html" class="btn">CHAT WITH OUR BOT</a>
+        <a href="{{ url_for('chatbot') }}" class="btn">CHAT WITH OUR BOT</a>
       </div>
     </section>
 
@@ -53,23 +57,15 @@
       <div class="feature-cards">
         <div class="card">
           <h3>Mood Tracking</h3>
-          <p>
-            Track your daily emotions and identify patterns that impact your
-            well-being.
-          </p>
+          <p>Track your daily emotions and identify patterns that impact your well-being.</p>
         </div>
         <div class="card">
           <h3>Stress Relief</h3>
-          <p>
-            Access guided breathing and meditation exercises to calm your mind.
-          </p>
+          <p>Access guided breathing and meditation exercises to calm your mind.</p>
         </div>
         <div class="card">
           <h3>Mindfulness</h3>
-          <p>
-            Stay present with daily mindfulness reminders and journaling
-            prompts.
-          </p>
+          <p>Stay present with daily mindfulness reminders and journaling prompts.</p>
         </div>
       </div>
     </section>
@@ -98,9 +94,7 @@
       <h2>Frequently Asked Questions</h2>
       <div class="faq-container">
         <div class="faq-card">
-          <button class="faq-question">
-            Is MindEase free to use? <span class="arrow">+</span>
-          </button>
+          <button class="faq-question">Is MindEase free to use? <span class="arrow">+</span></button>
           <p class="faq-answer">
             Yes! MindEase offers free tools for mood tracking, stress relief,
             and mindfulness. Premium features may be added later.
@@ -108,9 +102,7 @@
         </div>
 
         <div class="faq-card">
-          <button class="faq-question">
-            How does MindEase protect my data? <span class="arrow">+</span>
-          </button>
+          <button class="faq-question">How does MindEase protect my data? <span class="arrow">+</span></button>
           <p class="faq-answer">
             Your privacy matters. All your data is securely stored and never
             shared with third parties.
@@ -118,10 +110,7 @@
         </div>
 
         <div class="faq-card">
-          <button class="faq-question">
-            How does MindEase help improve mental health?
-            <span class="arrow">+</span>
-          </button>
+          <button class="faq-question">How does MindEase help improve mental health? <span class="arrow">+</span></button>
           <p class="faq-answer">
             MindEase offers guided exercises, mood tracking, and helpful
             resources that are designed to reduce stress, improve focus, and
@@ -130,10 +119,7 @@
         </div>
 
         <div class="faq-card">
-          <button class="faq-question">
-            Do I need prior experience with therapy or mindfulness?
-            <span class="arrow">+</span>
-          </button>
+          <button class="faq-question">Do I need prior experience with therapy or mindfulness? <span class="arrow">+</span></button>
           <p class="faq-answer">
             Not at all! MindEase is beginner-friendly and provides simple steps
             to start your journey toward better mental health.
@@ -141,10 +127,7 @@
         </div>
 
         <div class="faq-card">
-          <button class="faq-question">
-            Is MindEase a replacement for professional therapy?
-            <span class="arrow">+</span>
-          </button>
+          <button class="faq-question">Is MindEase a replacement for professional therapy? <span class="arrow">+</span></button>
           <p class="faq-answer">
             No, MindEase is a supportive tool to improve your daily mental
             well-being, but it should not replace professional medical advice or
@@ -167,10 +150,7 @@
         <div class="member-card">
           <div class="card-inner">
             <div class="card-front">
-              <img
-                src="../assets/images/bhavya.png"
-                alt="Bhavya - Frontend Developer"
-              />
+              <img src="{{ url_for('static', filename='assets/images/bhavya.png') }}" alt="Bhavya - Frontend Developer" />
               <h3>Bhavya Bhardwaj</h3>
               <p><strong>Frontend Developer + NLP Integration</strong></p>
             </div>
@@ -188,16 +168,9 @@
         <div class="member-card">
           <div class="card-inner">
             <div class="card-front">
-              <img
-                src="../assets/images/suryakiran.png"
-                alt="Suryakiran - UI/UX Designer"
-              />
+              <img src="{{ url_for('static', filename='assets/images/suryakiran.png') }}" alt="Suryakiran - UI/UX Designer" />
               <h3>Suryakiran</h3>
-              <p>
-                <strong
-                  >UI/UX Designer + Presentation & Documentation Head</strong
-                >
-              </p>
+              <p><strong>UI/UX Designer + Presentation & Documentation Head</strong></p>
             </div>
             <div class="card-back">
               <p>
@@ -213,10 +186,7 @@
         <div class="member-card">
           <div class="card-inner">
             <div class="card-front">
-              <img
-                src="../assets/images/krish.png"
-                alt="Krish - Backend Developer"
-              />
+              <img src="{{ url_for('static', filename='assets/images/krish.png') }}" alt="Krish - Backend Developer" />
               <h3>Krish Mathur</h3>
               <p><strong>Backend Developer (Flask + Python)</strong></p>
             </div>
@@ -234,10 +204,7 @@
         <div class="member-card">
           <div class="card-inner">
             <div class="card-front">
-              <img
-                src="../assets/images/nandana.png"
-                alt="Nandana - Database Manager"
-              />
+              <img src="{{ url_for('static', filename='assets/images/nandana.png') }}" alt="Nandana - Database Manager" />
               <h3>Nandana</h3>
               <p><strong>Database & Session Manager</strong></p>
             </div>
@@ -255,10 +222,7 @@
         <div class="member-card">
           <div class="card-inner">
             <div class="card-front">
-              <img
-                src="../assets/images/dhruv.png"
-                alt="Dhruv - NLP & AI Engineer"
-              />
+              <img src="{{ url_for('static', filename='assets/images/dhruv.png') }}" alt="Dhruv - NLP & AI Engineer" />
               <h3>Dhruv Kale</h3>
               <p><strong>NLP & AI Integration Engineer</strong></p>
             </div>
@@ -279,8 +243,8 @@
       <h2>Ready to Improve Your Mental Health?</h2>
       <a href="#" class="btn">Join MindEase Today</a>
     </section>
-    
 
-    <script src="../js/script.js"></script>
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
   </body>
 </html>

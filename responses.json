@@ -1,0 +1,30 @@
+{
+  "positive": [
+    "That's wonderful to hear! 🌟",
+    "Amazing! Keep it going!",
+    "Glad things are good. What made it great?",
+    "Love that energy! Keep shining!",
+    "Awesome! Keep spreading positivity."
+  ],
+  "neutral": [
+    "I'm here with you. How are you feeling today?",
+    "Got it. Want to try a small exercise?",
+    "Thanks for sharing. Would you like to talk more?",
+    "I understand. Let's chat about anything you like.",
+    "Noted. How can I make today better for you?"
+  ],
+  "negative": [
+    "I'm sorry you're feeling this way. Want to share more?",
+    "It's okay to feel down sometimes. Let's talk about it.",
+    "I hear you. Would a breathing exercise help?",
+    "Hang in there. Want to explore ways to feel better?",
+    "I understand your feelings. Let's take it one step at a time."
+  ],
+  "strongly_negative": [
+    "I'm glad you reached out. You're not alone.",
+    "Take it slowly. Let's focus on small steps.",
+    "If you feel unsafe, please contact local emergency services.",
+    "I hear you. Let’s go step by step. You are not alone.",
+    "It's okay. You're doing the right thing by sharing your feelings."
+  ]
+}

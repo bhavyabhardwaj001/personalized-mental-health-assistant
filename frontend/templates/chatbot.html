@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MindEase Chatbot</title>
+
+    <!-- CSS for Flask -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot.css') }}" />
+
+    <!-- Google Fonts -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600&display=swap"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <a href="{{ url_for('home') }}" class="logo"><h1>MindEase</h1></a>
+        <nav>
+          <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Chatbot Section -->
+    <section class="chat-section">
+      <div class="chat-container glass-panel">
+        <div class="chat-header">
+          <h2>MindEase Chatbot 🤖</h2>
+          <p>Your personal mental health companion</p>
+        </div>
+
+        <!-- Chat Messages -->
+        <div class="chatbox" id="chatbox">
+          <!-- Bot welcome message -->
+          <div class="message bot">
+            <p>Hello 👋 I'm MindEase! How are you feeling today?</p>
+          </div>
+        </div>
+
+        <!-- Chat Input -->
+        <div class="chat-input">
+          <input type="text" id="userInput" placeholder="Type your message..." />
+          <button id="sendBtn">Send</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- JS for Flask -->
+    <script>
+      let session_id = null;
+    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
+</html>
