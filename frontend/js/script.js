@@ -5,17 +5,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     faqQuestions.forEach((question) => {
         question.addEventListener("click", () => {
-            // Toggle the "active" state for styling
-            question.classList.toggle("active");
+  question.classList.toggle("active");
 
-            // Show/hide the answer
-            const answer = question.nextElementSibling;
-            if (answer.style.maxHeight) {
-                answer.style.maxHeight = null;
-            } else {
-                answer.style.maxHeight = answer.scrollHeight + "px";
-            }
-        });
+  const answer = question.nextElementSibling;
+  if (answer.style.maxHeight) {
+    answer.style.maxHeight = null;
+    answer.classList.remove("open");
+  } else {
+    answer.style.maxHeight = answer.scrollHeight + "px";
+    answer.classList.add("open");
+  }
+});
+
     });
 
     // 2. Chatbot Toggle
