@@ -7,9 +7,12 @@
 
 body {
   font-family: "Roboto", sans-serif;
-  color: #333;
+  color: #ffffff;
   line-height: 1.6;
-  background: #f4f6fc; /* light background for the whole site */
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("https://images.unsplash.com/photo-1450849608880-6f787542c88a?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+      no-repeat center center / cover;
+  background-attachment: fixed;
 }
 
 a {
@@ -26,11 +29,11 @@ a {
 
 /* === Header === */
 header {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  color: #333;
+  color: #ffffff;
   padding: 15px 0;
   position: sticky;
   top: 0;
@@ -48,7 +51,7 @@ header h1 {
   font-family: "Montserrat", sans-serif;
   font-size: 1.8rem;
   font-weight: 700;
-  color: #6c63ff;
+  color: #e2a748;
 }
 
 header nav ul {
@@ -62,7 +65,7 @@ header nav ul li {
 }
 
 header nav a {
-  color: #333;
+  color: #fff;
   font-weight: 500;
   padding: 8px 14px;
   border-radius: 8px;
@@ -70,8 +73,8 @@ header nav a {
 }
 
 header nav a:hover {
-  background: #6c63ff;
-  color: #fff;
+  background: linear-gradient(135deg, #ffcb63, #9a8dff);
+  color: #000000;
   box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
 }
 
@@ -82,14 +85,8 @@ header nav a:hover {
   align-items: center;
   height: 80vh;
   text-align: center;
-  color: #fff;
+  color: white;
   padding: 0 20px;
-
-  /* Background with dark overlay */
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("https://images.unsplash.com/photo-1754215683705-ee0a731d7288?q=80&w=1075&auto=format&fit=crop&ixlib=rb-4.1.0")
-      no-repeat center center / cover;
-  background-attachment: fixed;
 }
 
 .hero-content h1 {
@@ -124,23 +121,23 @@ header nav a:hover {
 .features {
   text-align: center;
   padding: 60px 20px;
-  background: #fdfdfd;
+  background: linear-gradient(135deg, #ffcb63, #9a8dff);
   border-radius: 15px;
   margin: 40px auto;
   max-width: 1200px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 .features h2 {
   font-family: "Montserrat", sans-serif;
   font-size: 2rem;
   margin-bottom: 20px;
-  color: #6c63ff;
+  color: #ffffff;
 }
 
 .features p {
   margin-bottom: 40px;
-  color: #555;
+  color: #ffffff;
 }
 
 .feature-cards {
@@ -150,7 +147,7 @@ header nav a:hover {
 }
 
 .feature-cards .card {
-  background: #fff;
+  background: linear-gradient(135deg, #ffcb63, #9a8dff);
   padding: 25px;
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
@@ -163,13 +160,13 @@ header nav a:hover {
 }
 
 .feature-cards .card h3 {
-  color: #6c63ff;
+  color: #000000;
   margin-bottom: 15px;
   font-size: 1.3rem;
 }
 
 .feature-cards .card p {
-  color: #444;
+  color: #000000;
   font-size: 0.95rem;
 }
 
@@ -177,98 +174,163 @@ header nav a:hover {
 .about {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 40px;
-  background: #fff;
+  gap: 30px;
+  background: none; /* remove the gradient from whole section */
   padding: 40px;
+}
+.about-card {
+  background: linear-gradient(135deg, #ffcb63, #9a8dff);
   border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  padding: 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.about-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}.about-card img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 0px;
+  object-fit: cover;
 }
 
-.about img {
-  width: 100%;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
 
 .about h2 {
   font-family: "Montserrat", sans-serif;
   font-size: 2rem;
-  color: #6c63ff;
+  color: #000000;
   margin-bottom: 20px;
+}
+.about p {
+  color: black;
 }
 
 /* === FAQ Section === */
 .faq {
-  background: #f9f9f9;
-  border-radius: 12px;
   padding: 40px 20px;
+  background: none; /* remove full gradient */
 }
 
-.faq h2 {
-  text-align: center;
-  color: #6c63ff;
-  margin-bottom: 40px;
-  font-family: "Montserrat", sans-serif;
+.faq-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
 }
 
-.faq-item {
-  margin-bottom: 25px;
+.faq-card {
+  background: linear-gradient(135deg, #ffcb63, #9a8dff);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.faq-item h3 {
+.faq-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #eeba52, #9a8dff);
+}
+
+.faq-card h3 {
   font-size: 1.2rem;
   margin-bottom: 10px;
-  color: #333;
+  color: #000000;
 }
 
-.faq-item p {
-  color: #555;
+.faq-card p {
+  color: #000;
+  font-size: 0.95rem;
 }
 
 /* === Team Section === */
+/* === Team Section === */
+/* === Team Section === */
 .team {
   text-align: center;
-  background: #fff;
-  border-radius: 12px;
   padding: 60px 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .team h2 {
-  color: #6c63ff;
+  color: #ffffff;
   font-family: "Montserrat", sans-serif;
   font-size: 2rem;
   margin-bottom: 20px;
 }
 
 .team-members {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  display: flex;
+  justify-content: space-between;
   gap: 20px;
-  margin-top: 40px;
+  flex-wrap: nowrap;   
+  overflow: hidden;   
 }
-
+/* Flip Card */
 .member-card {
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: transform 0.3s;
+  flex: 1;             
+  min-width: 150px;    
+  height: 300px;
 }
 
-.member-card img {
-  width: 120px;
-  height: 120px;
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+  border-radius: 12px;
+}
+
+.member-card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Front & Back common styles */
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Front */
+.card-front {
+  background: linear-gradient(135deg, #ffcb63, #9a8dff);
+  text-align: center;
+}
+
+.card-front img {
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   margin-bottom: 15px;
   object-fit: cover;
 }
 
-.member-card:hover {
-  transform: translateY(-8px);
+/* Back */
+.card-back {
+  background: linear-gradient(135deg, #9a8dff, #ffcb63);
+  color: #000;
+  transform: rotateY(180deg);
+  text-align: center;
+  font-size: 0.95rem;
 }
+
 
 .member-card h3 {
   margin-bottom: 10px;
@@ -278,12 +340,12 @@ header nav a:hover {
 
 .member-card p {
   font-size: 0.95rem;
-  color: #555;
+  color: #000000;
 }
 
 /* === CTA Section === */
 .cta {
-  background: #6c63ff;
+  background: linear-gradient(135deg, #ffcb63, #9a8dff);
   color: #fff;
   text-align: center;
   padding: 60px 20px;
@@ -320,4 +382,24 @@ footer {
   .hero-content p {
     font-size: 1rem;
   }
+}
+
+/* Frosted Glass Effect */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.125); /* transparent white */
+  backdrop-filter: blur(12px); /* frosted blur */
+  -webkit-backdrop-filter: blur(12px); /* Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* subtle border */
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* depth */
+  padding: 20px;
+}
+
+.about,
+.faq,
+.team,
+.cta,
+.features {
+  margin: 60px auto;  /* spacing between sections */
+  max-width: 1200px;  /* keep them aligned */
 }

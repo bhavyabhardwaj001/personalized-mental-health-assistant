@@ -39,12 +39,12 @@
           Your personalized mental health assistant that helps you track
           mood,reduce stress, and stay mindful every day.
         </p>
-        <a href="#features" class="btn">Start Your Journey</a>
+        <a href="chatbot.html" class="btn">CHAT WITH OUR BOT</a>
       </div>
     </section>
 
     <!-- Features Section -->
-    <section class="features container" id="features">
+    <section class="features container glass-panel" id="features">
       <h2>Features</h2>
       <p>
         Discover how MindEase helps you improve mental well-being with these
@@ -75,12 +75,14 @@
     </section>
 
     <!-- About Section -->
-    <section class="about container" id="about">
-      <img
-        src="https://images.unsplash.com/photo-1524492449090-1a065f6c76de?auto=format&fit=crop&w=800&q=80"
-        alt="Illustration of a person practicing mindfulness"
-      />
-      <div>
+    <section class="about container glass-panel" id="about">
+      <div class="about-card">
+        <img
+          src="https://images.unsplash.com/reserve/YEc7WB6ASDydBTw6GDlF_antalya-beach-lulu.jpg?q=80&w=1301&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="Illustration of a person practicing mindfulness"
+        />
+      </div>
+      <div class="about-card">
         <h2>About MindEase</h2>
         <p>
           MindEase is a personalized mental health assistant designed to help
@@ -90,27 +92,50 @@
         </p>
       </div>
     </section>
+
     <!-- FAQ Section -->
-    <section class="faq container" id="faq">
+    <section class="faq container glass-panel" id="faq">
       <h2>Frequently Asked Questions</h2>
-      <div class="faq-item">
-        <h3>Is MindEase free to use?</h3>
-        <p>
-          Yes! MindEase offers free tools for mood tracking, stress relief, and
-          mindfulness. Premium features may be added later.
-        </p>
-      </div>
-      <div class="faq-item">
-        <h3>How does MindEase protect my data?</h3>
-        <p>
-          Your privacy matters. All your data is securely stored and never
-          shared with third parties.
-        </p>
+      <div class="faq-container">
+        <div class="faq-card">
+          <h3>Is MindEase free to use?</h3>
+          <p>
+            Yes! MindEase offers free tools for mood tracking, stress relief,
+            and mindfulness. Premium features may be added later.
+          </p>
+        </div>
+        <div class="faq-card">
+          <h3>How does MindEase protect my data?</h3>
+          <p>
+            Your privacy matters. All your data is securely stored and never
+            shared with third parties.
+          </p>
+        </div>
+        <div class="faq-card">
+          <h3>How does MindEase help improve mental health?</h3>
+          <p>
+            MindEase offers guided exercises, mood tracking, and helpful
+            resources that are designed to reduce stress, improve focus, and
+            support overall emotional well-being.
+          </p>
+        </div>
+        <div class="faq-card">
+          <h3>Do I need prior experience with therapy or mindfulness?</h3>
+          <p>
+            Not at all! MindEase is beginner-friendly and provides simple steps to start your journey toward better mental health
+          </p>
+        </div>
+        <div class="faq-card">
+          <h3>Is MindEase a replacement for professional therapy?</h3>
+          <p>
+            No, MindEase is a supportive tool to improve your daily mental well-being, but it should not replace professional medical advice or therapy when needed.
+          </p>
+        </div>
       </div>
     </section>
 
     <!-- Team Section -->
-    <section class="team container" id="team">
+    <section class="team container glass-panel" id="team">
       <h2>Meet the Team</h2>
       <p>
         Our team combines design, development, and AI expertise to build
@@ -120,79 +145,117 @@
       <div class="team-members">
         <!-- Bhavya -->
         <div class="member-card">
-          <img
-            src="assets/images/bhavya.jpg"
-            alt="Bhavya - Frontend Developer & NLP Integration"
-          />
-          <h3>Bhavya Bhardwaj</h3>
-          <p><strong>Frontend Developer + NLP Integration</strong></p>
-          <p>
-            Handles the chatbot interface and main web pages using HTML, CSS,
-            and JS. Integrates basic NLP techniques with the frontend and
-            collaborates with backend and AI engineers.
-          </p>
+          <div class="card-inner">
+            <div class="card-front">
+              <img
+                src="../assets/images/bhavya.png"
+                alt="Bhavya - Frontend Developer"
+              />
+              <h3>Bhavya Bhardwaj</h3>
+              <p><strong>Frontend Developer + NLP Integration</strong></p>
+            </div>
+            <div class="card-back">
+              <p>
+                Handles the chatbot interface and main web pages using HTML,
+                CSS, and JS. Integrates basic NLP techniques with the frontend
+                and collaborates with backend and AI engineers.
+              </p>
+            </div>
+          </div>
         </div>
 
         <!-- Suryakiran -->
         <div class="member-card">
-          <img
-            src="assets/images/suryakiran.jpg"
-            alt="Suryakiran - UI/UX Designer"
-          />
-          <h3>Suryakiran</h3>
-          <p>
-            <strong>UI/UX Designer + Presentation & Documentation Head</strong>
-          </p>
-          <p>
-            Designs intuitive, user-friendly interfaces and ensures
-            responsiveness across devices. Leads project documentation, reports,
-            and presentations.
-          </p>
+          <div class="card-inner">
+            <div class="card-front">
+              <img
+                src="../assets/images/suryakiran.png"
+                alt="Suryakiran - UI/UX Designer"
+              />
+              <h3>Suryakiran</h3>
+              <p>
+                <strong
+                  >UI/UX Designer + Presentation & Documentation Head</strong
+                >
+              </p>
+            </div>
+            <div class="card-back">
+              <p>
+                Designs intuitive, user-friendly interfaces and ensures
+                responsiveness across devices. Leads project documentation,
+                reports, and presentations.
+              </p>
+            </div>
+          </div>
         </div>
 
         <!-- Krish -->
         <div class="member-card">
-          <img src="assets/images/krish.jpg" alt="Krish - Backend Developer" />
-          <h3>Krish Mathur</h3>
-          <p><strong>Backend Developer (Flask + Python)</strong></p>
-          <p>
-            Builds backend infrastructure with Flask, manages APIs for chatbot
-            and mood tracking, and ensures smooth data flow between frontend and
-            database.
-          </p>
+          <div class="card-inner">
+            <div class="card-front">
+              <img
+                src="../assets/images/krish.png"
+                alt="Krish - Backend Developer"
+              />
+              <h3>Krish Mathur</h3>
+              <p><strong>Backend Developer (Flask + Python)</strong></p>
+            </div>
+            <div class="card-back">
+              <p>
+                Builds backend infrastructure with Flask, manages APIs for
+                chatbot and mood tracking, and ensures smooth data flow between
+                frontend and database.
+              </p>
+            </div>
+          </div>
         </div>
 
         <!-- Nandana -->
         <div class="member-card">
-          <img
-            src="assets/images/nandana.jpg"
-            alt="Nandana - Database Manager"
-          />
-          <h3>Nandana</h3>
-          <p><strong>Database & Session Manager</strong></p>
-          <p>
-            Designs and manages the database for user sessions, authentication,
-            and mood logs. Ensures secure, efficient data storage and supports
-            backend with queries.
-          </p>
+          <div class="card-inner">
+            <div class="card-front">
+              <img
+                src="../assets/images/nandana.png"
+                alt="Nandana - Database Manager"
+              />
+              <h3>Nandana</h3>
+              <p><strong>Database & Session Manager</strong></p>
+            </div>
+            <div class="card-back">
+              <p>
+                Designs and manages the database for user sessions,
+                authentication, and mood logs. Ensures secure, efficient data
+                storage and supports backend with queries.
+              </p>
+            </div>
+          </div>
         </div>
 
         <!-- Dhruv -->
         <div class="member-card">
-          <img src="assets/images/dhruv.jpg" alt="Dhruv - NLP & AI Engineer" />
-          <h3>Dhruv Kale</h3>
-          <p><strong>NLP & AI Integration Engineer</strong></p>
-          <p>
-            Implements sentiment analysis and integrates GPT API for intelligent
-            responses. Balances local responses vs GPT for efficiency and
-            personalization.
-          </p>
+          <div class="card-inner">
+            <div class="card-front">
+              <img
+                src="../assets/images/dhruv.png"
+                alt="Dhruv - NLP & AI Engineer"
+              />
+              <h3>Dhruv Kale</h3>
+              <p><strong>NLP & AI Integration Engineer</strong></p>
+            </div>
+            <div class="card-back">
+              <p>
+                Implements sentiment analysis and integrates GPT API for
+                intelligent responses. Balances local responses vs GPT for
+                efficiency and personalization.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Call to Action -->
-    <section class="cta container" id="contact">
+    <section class="cta container glass-panel" id="contact">
       <h2>Ready to Improve Your Mental Health?</h2>
       <a href="#" class="btn">Join MindEase Today</a>
     </section>
