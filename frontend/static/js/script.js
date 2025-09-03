@@ -63,3 +63,27 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+// FAQ Toggle with smooth height transition
+document.addEventListener("DOMContentLoaded", () => {
+  const faqQuestions = document.querySelectorAll(".faq-question");
+
+  faqQuestions.forEach((question) => {
+    question.addEventListener("click", () => {
+      const answer = question.nextElementSibling;
+
+      if (answer.style.maxHeight) {
+        // Collapse
+        answer.style.maxHeight = null;
+      } else {
+        // Expand to fit content
+        answer.style.maxHeight = answer.scrollHeight + "px";
+      }
+
+      // Toggle the + / - symbol
+      const arrow = question.querySelector(".arrow");
+      arrow.textContent = answer.style.maxHeight ? "-" : "+";
+    });
+  });
+});
+

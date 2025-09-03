@@ -9,9 +9,10 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))  # just the backend folder
 
 app = Flask(
     __name__,
-    template_folder=os.path.join(BASE_DIR, "..", "frontend", "templates"),
-    static_folder=os.path.join(BASE_DIR, "..", "frontend", "static")
+    template_folder=os.path.join(BASE_DIR, "frontend", "templates"),
+    static_folder=os.path.join(BASE_DIR, "frontend", "static")
 )
+
 CORS(app)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(BASE_DIR, "database", "mindease.db")

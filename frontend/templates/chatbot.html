@@ -6,12 +6,15 @@
     <title>MindEase Chatbot</title>
 
     <!-- CSS for Flask -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/chatbot.css') }}"
+    />
 
     <!-- Google Fonts -->
     <link
-      rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600&display=swap"
+      rel="stylesheet"
     />
   </head>
   <body>
@@ -19,39 +22,128 @@
     <header>
       <div class="container">
         <a href="{{ url_for('home') }}" class="logo"><h1>MindEase</h1></a>
-        <nav>
-          <ul>
-            <li><a href="{{ url_for('home') }}">Home</a></li>
-          </ul>
-        </nav>
       </div>
     </header>
 
-    <!-- Chatbot Section -->
-    <section class="chat-section">
-      <div class="chat-container glass-panel">
+    <!-- Chat Layout -->
+    <div class="chat-page">
+      <!-- Left Sidebar -->
+      <aside class="left-panel glass-panel">
+        <h3>Quick Tips 💡</h3>
+        <ul>
+          <li>Take deep breaths for 2 minutes.</li>
+          <li>Write down one thing you’re grateful for.</li>
+          <li>Stretch and relax your shoulders.</li>
+          <li>Take a short walk outside.</li>
+          <li>Listen to calming music.</li>
+          <li>Drink a glass of water to refresh your mind.</li>
+          <li>Take a short power nap (10-20 minutes).</li>
+          <li>Do 5 minutes of mindful breathing.</li>
+          <li>Step outside and get some sunlight.</li>
+          <li>Write down a small goal for today.</li>
+        </ul>
+
+      
+      </aside>
+
+      <!-- Center Chat Panel -->
+      <section class="chat-section glass-panel">
         <div class="chat-header">
           <h2>MindEase Chatbot 🤖</h2>
           <p>Your personal mental health companion</p>
         </div>
 
-        <!-- Chat Messages -->
         <div class="chatbox" id="chatbox">
-          <!-- Bot welcome message -->
           <div class="message bot">
             <p>Hello 👋 I'm MindEase! How are you feeling today?</p>
           </div>
         </div>
 
-        <!-- Chat Input -->
         <div class="chat-input">
-          <input type="text" id="userInput" placeholder="Type your message..." />
+          <input
+            type="text"
+            id="userInput"
+            placeholder="Type your message..."
+          />
           <button id="sendBtn">Send</button>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- JS for Flask -->
+      <!-- Right Sidebar -->
+      <aside class="right-panel glass-panel">
+        <h3>Resources 📚</h3>
+        <ul>
+          <li>
+            <a
+              href="https://www.headspace.com/meditation/guided-meditation"
+              target="_blank"
+              >Guided Meditation</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.health.harvard.edu/mind-and-mood/six-relaxation-techniques-to-reduce-stress"
+              target="_blank"
+              >Stress Relief Exercises</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://positivepsychology.com/journaling-for-mindfulness/"
+              target="_blank"
+              >Mindfulness Journaling</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.pinerest.org/newsroom/articles/mental-health-awareness-blog/"
+              target="_blank"
+              >Mental Health Articles</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.thelivelovelaughfoundation.org/find-help/helplines"
+              target="_blank"
+              >Emergency Contacts</a
+            >
+          </li>
+        </ul>
+
+        <h3>Music Recommendations 🎵</h3>
+        <ul>
+          <li>
+            <a
+              href="https://open.spotify.com/playlist/37i9dQZF1DX3PIPIT6lEg5"
+              target="_blank"
+              >Calm Vibes - Spotify</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.youtube.com/playlist?list=PLFgquLnL59alCl_2TQvOiD5Vgm1hCaGSI"
+              target="_blank"
+              >Lo-Fi Chill Beats - YouTube</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://open.spotify.com/playlist/37i9dQZF1DX4sWSpwq3LiO"
+              target="_blank"
+              >Peaceful Piano - Spotify</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.youtube.com/watch?v=2OEL4P1Rz04"
+              target="_blank"
+              >Relaxing Nature Sounds - YouTube</a
+            >
+          </li>
+        </ul>
+      </aside>
+    </div>
+
     <script>
       let session_id = null;
     </script>
