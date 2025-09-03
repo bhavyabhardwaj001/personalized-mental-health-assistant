@@ -2,6 +2,7 @@ from flask_cors import CORS
 import os, datetime, uuid, random, json
 from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
 
 # ---------- Setup ----------
@@ -18,6 +19,12 @@ CORS(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(BASE_DIR, "database", "mindease.db")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
+
+# ---------- Ensure NLTK Data ----------
+try:
+    nltk.data.find("sentiment/vader_lexicon.zip")
+except LookupError:
+    nltk.download("vader_lexicon")
 
 # ---------- Sentiment Analyzer ----------
 sia = SentimentIntensityAnalyzer()
