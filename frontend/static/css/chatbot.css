@@ -356,3 +356,37 @@ header h1 {
     display: none;
   }
 }
+/* Typing indicator animation */
+.typing-indicator {
+  display: flex;
+  flex-direction: row;   /* 👉 make it horizontal */
+  gap: 5px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.typing-indicator span {
+  display: inline-block;  /* 👉 inline instead of block */
+  width: 8px;
+  height: 8px;
+  background: #000;
+  border-radius: 50%;
+  animation: bounce 1.4s infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}

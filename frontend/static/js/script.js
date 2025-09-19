@@ -1,22 +1,36 @@
 // script.js
-
 document.addEventListener("DOMContentLoaded", () => {
   const chatbox = document.getElementById("chatbox");
   const userInput = document.getElementById("userInput");
   const sendBtn = document.getElementById("sendBtn");
 
+  // Typing indicator functions
+  function showTypingIndicator() {
+    const typingDiv = document.createElement("div");
+    typingDiv.className = "message bot typing";
+    typingDiv.id = "bot-thinking";
+    typingDiv.innerHTML = `
+      <p class="typing-indicator">
+        <span></span><span></span><span></span>
+      </p>
+    `;
+    chatbox.appendChild(typingDiv);
+    chatbox.scrollTop = chatbox.scrollHeight;
+  }
+
+  function hideTypingIndicator() {
+    const typingDiv = document.getElementById("bot-thinking");
+    if (typingDiv) typingDiv.remove();
+  }
+
   // Add message to chatbox
   function addMessage(sender, message) {
     const messageDiv = document.createElement("div");
     messageDiv.classList.add("message", sender);
-
     const textNode = document.createElement("p");
     textNode.textContent = message;
-
     messageDiv.appendChild(textNode);
     chatbox.appendChild(messageDiv);
-
-    // Scroll to bottom
     chatbox.scrollTop = chatbox.scrollHeight;
   }
 
@@ -29,26 +43,29 @@ document.addEventListener("DOMContentLoaded", () => {
     addMessage("user", message);
     userInput.value = "";
 
+    // Show typing indicator
+    showTypingIndicator();
+
     try {
       const response = await fetch("/api/message", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: message, session_id: session_id })
+        body: JSON.stringify({ message: message, session_id: session_id }),
       });
 
-      if (!response.ok) {
-        throw new Error("Server error: " + response.statusText);
-      }
+      if (!response.ok) throw new Error("Server error: " + response.statusText);
 
       const data = await response.json();
-
-      // Save session ID for future messages
       session_id = data.session_id;
 
-      // Show bot reply
+      // Hide typing dots
+      hideTypingIndicator();
+
+      // Add bot reply
       addMessage("bot", data.reply);
     } catch (error) {
       console.error("Error:", error);
+      hideTypingIndicator();
       addMessage("bot", "⚠️ Sorry, something went wrong. Please try again later.");
     }
   }
@@ -63,27 +80,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
-// FAQ Toggle with smooth height transition
-document.addEventListener("DOMContentLoaded", () => {
-  const faqQuestions = document.querySelectorAll(".faq-question");
-
-  faqQuestions.forEach((question) => {
-    question.addEventListener("click", () => {
-      const answer = question.nextElementSibling;
-
-      if (answer.style.maxHeight) {
-        // Collapse
-        answer.style.maxHeight = null;
-      } else {
-        // Expand to fit content
-        answer.style.maxHeight = answer.scrollHeight + "px";
-      }
-
-      // Toggle the + / - symbol
-      const arrow = question.querySelector(".arrow");
-      arrow.textContent = answer.style.maxHeight ? "-" : "+";
-    });
-  });
-});
-
