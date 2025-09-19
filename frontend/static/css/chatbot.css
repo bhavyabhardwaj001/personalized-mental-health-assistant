@@ -38,7 +38,6 @@ header {
   background: var(--header-bg);
   backdrop-filter: blur(10px);
   padding: 15px 20px;
-  
 }
 
 header .container {
@@ -52,7 +51,6 @@ header h1 {
   color: var(--accent);
   font-size: 1.7rem;
   letter-spacing: 1px;
-  
 }
 
 /* Chat Layout */
@@ -359,14 +357,14 @@ header h1 {
 /* Typing indicator animation */
 .typing-indicator {
   display: flex;
-  flex-direction: row;   /* 👉 make it horizontal */
+  flex-direction: row; /* 👉 make it horizontal */
   gap: 5px;
   align-items: center;
   justify-content: flex-start;
 }
 
 .typing-indicator span {
-  display: inline-block;  /* 👉 inline instead of block */
+  display: inline-block; /* 👉 inline instead of block */
   width: 8px;
   height: 8px;
   background: #000;
@@ -383,7 +381,9 @@ header h1 {
 }
 
 @keyframes bounce {
-  0%, 80%, 100% {
+  0%,
+  80%,
+  100% {
     transform: scale(0);
   }
   40% {

@@ -10,8 +10,7 @@ body {
   color: #ffffff;
   line-height: 1.6;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("https://images.unsplash.com/photo-1450849608880-6f787542c88a?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-      no-repeat center center / cover;
+    url("../assets/images/home_background.jpg") no-repeat center center / cover;
   background-attachment: fixed;
 }
 
@@ -159,7 +158,7 @@ header nav a:hover {
 
 /* Holographic Overlay */
 .feature-cards .card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -50%;
   left: -50%;
@@ -185,11 +184,21 @@ header nav a:hover {
 }
 
 @keyframes holo-shine {
-  0% { transform: rotate(0deg) translateX(0) translateY(0); }
-  25% { transform: rotate(45deg) translateX(10%) translateY(-10%); }
-  50% { transform: rotate(90deg) translateX(-10%) translateY(10%); }
-  75% { transform: rotate(135deg) translateX(5%) translateY(-5%); }
-  100% { transform: rotate(360deg) translateX(0) translateY(0); }
+  0% {
+    transform: rotate(0deg) translateX(0) translateY(0);
+  }
+  25% {
+    transform: rotate(45deg) translateX(10%) translateY(-10%);
+  }
+  50% {
+    transform: rotate(90deg) translateX(-10%) translateY(10%);
+  }
+  75% {
+    transform: rotate(135deg) translateX(5%) translateY(-5%);
+  }
+  100% {
+    transform: rotate(360deg) translateX(0) translateY(0);
+  }
 }
 
 /* Keep content above overlay */
@@ -204,13 +213,11 @@ header nav a:hover {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
-
 .feature-cards .card h3 {
   color: #000000;
   margin-bottom: 15px;
   font-size: 1.3rem;
 }
-
 
 .feature-cards .card p {
   color: #000000;
@@ -275,7 +282,6 @@ header nav a:hover {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 
 .faq-card:hover {
   transform: translateY(-8px);
