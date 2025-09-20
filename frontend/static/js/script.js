@@ -6,6 +6,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const loginBtn = document.getElementById("loginBtn");
   const loginModal = document.getElementById("loginModal");
   const closeBtn = document.querySelector("#loginModal .close");
+  const faqQuestions = document.querySelectorAll(".faq-question");
+
+  faqQuestions.forEach((question) => {
+  question.addEventListener("click", () => {
+    const answer = question.nextElementSibling; // get the <p> immediately after button
+    const arrow = question.querySelector(".arrow");
+
+    // Toggle the max-height
+    if (answer.style.maxHeight) {
+      answer.style.maxHeight = null; // collapse
+      arrow.textContent = "+"; // change arrow back
+    } else {
+      answer.style.maxHeight = answer.scrollHeight + "px"; // expand
+      arrow.textContent = "−"; // change arrow to minus
+    }
+  });
+});
   loginBtn.addEventListener("click", (e) => {
     e.preventDefault();
     loginModal.classList.add("show");
