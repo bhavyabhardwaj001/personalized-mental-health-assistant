@@ -3,6 +3,25 @@ document.addEventListener("DOMContentLoaded", () => {
   const chatbox = document.getElementById("chatbox");
   const userInput = document.getElementById("userInput");
   const sendBtn = document.getElementById("sendBtn");
+  const loginBtn = document.getElementById("loginBtn");
+  const loginModal = document.getElementById("loginModal");
+  const closeBtn = document.querySelector("#loginModal .close");
+  loginBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    loginModal.classList.add("show");
+  });
+
+  // Close modal
+  closeBtn.addEventListener("click", () => {
+    loginModal.classList.remove("show");
+  });
+
+  // Close modal when clicking outside modal content
+  window.addEventListener("click", (e) => {
+    if (e.target === loginModal) {
+      loginModal.classList.remove("show");
+    }
+  });
 
   // Typing indicator functions
   function showTypingIndicator() {

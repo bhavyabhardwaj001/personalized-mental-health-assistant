@@ -34,7 +34,7 @@
             <li><a href="#about">About</a></li>
             <li><a href="#faq">FAQ</a></li>
             <li><a href="#team">Team</a></li>
-            <li><a href="#">Login/Signup</a></li>
+            <li><a href="#" id="loginBtn">Login/Signup</a></li>
           </ul>
         </nav>
       </div>
@@ -331,6 +331,49 @@
       <h2>Ready to Improve Your Mental Health?</h2>
       <a href="#" class="btn">Join MindEase Today</a>
     </section>
+
+    <!-- Login Modal -->
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="login-container">
+          <!-- Left side - animated background illustration -->
+          <div class="login-image">
+            <div class="animated-bg"></div>
+            <img
+              src="{{ url_for('static', filename='assets/images/mindfulness.jpg') }}"
+              alt="Mindfulness Illustration"
+            />
+          </div>
+
+          <!-- Right side - form -->
+          <div class="login-form">
+            <h2>Welcome Back</h2>
+            <p>Login to access your MindEase dashboard</p>
+            <form action="/login" method="POST">
+              <div class="input-wrapper">
+                <input type="email" name="email" required placeholder=" " />
+                <label>Email</label>
+              </div>
+              <div class="input-wrapper">
+                <input
+                  type="password"
+                  name="password"
+                  required
+                  placeholder=" "
+                />
+                <label>Password</label>
+              </div>
+              <button type="submit">Login</button>
+            </form>
+            <p class="signup-link">
+              Don't have an account? <a href="#">Sign Up</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- JS -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
