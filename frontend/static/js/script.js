@@ -8,48 +8,47 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeBtn = document.querySelector("#loginModal .close");
   const faqQuestions = document.querySelectorAll(".faq-question");
 
+  let session_id = null; // Track session for chat
+
+  // FAQ toggle
   faqQuestions.forEach((question) => {
-  question.addEventListener("click", () => {
-    const answer = question.nextElementSibling; // get the <p> immediately after button
-    const arrow = question.querySelector(".arrow");
-
-    // Toggle the max-height
-    if (answer.style.maxHeight) {
-      answer.style.maxHeight = null; // collapse
-      arrow.textContent = "+"; // change arrow back
-    } else {
-      answer.style.maxHeight = answer.scrollHeight + "px"; // expand
-      arrow.textContent = "−"; // change arrow to minus
-    }
-  });
-});
-  loginBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    loginModal.classList.add("show");
+    question.addEventListener("click", () => {
+      const answer = question.nextElementSibling;
+      const arrow = question.querySelector(".arrow");
+      if (answer.style.maxHeight) {
+        answer.style.maxHeight = null;
+        arrow.textContent = "+";
+      } else {
+        answer.style.maxHeight = answer.scrollHeight + "px";
+        arrow.textContent = "−";
+      }
+    });
   });
 
-  // Close modal
-  closeBtn.addEventListener("click", () => {
-    loginModal.classList.remove("show");
-  });
+  // Login modal
+  if (loginBtn && loginModal) {
+    loginBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      loginModal.classList.add("show");
+    });
+  }
 
-  // Close modal when clicking outside modal content
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => loginModal.classList.remove("show"));
+  }
+
   window.addEventListener("click", (e) => {
-    if (e.target === loginModal) {
-      loginModal.classList.remove("show");
-    }
+    if (loginModal && e.target === loginModal) loginModal.classList.remove("show");
   });
 
-  // Typing indicator functions
+  if (!chatbox || !userInput || !sendBtn) return;
+
+  // Typing indicator
   function showTypingIndicator() {
     const typingDiv = document.createElement("div");
     typingDiv.className = "message bot typing";
     typingDiv.id = "bot-thinking";
-    typingDiv.innerHTML = `
-      <p class="typing-indicator">
-        <span></span><span></span><span></span>
-      </p>
-    `;
+    typingDiv.innerHTML = `<p class="typing-indicator"><span></span><span></span><span></span></p>`;
     chatbox.appendChild(typingDiv);
     chatbox.scrollTop = chatbox.scrollHeight;
   }
@@ -73,13 +72,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Send message to backend
   async function sendMessage() {
     const message = userInput.value.trim();
-    if (message === "") return;
+    if (!message) return;
 
-    // Show user message
     addMessage("user", message);
     userInput.value = "";
-
-    // Show typing indicator
     showTypingIndicator();
 
     try {
@@ -92,12 +88,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!response.ok) throw new Error("Server error: " + response.statusText);
 
       const data = await response.json();
-      session_id = data.session_id;
+      session_id = data.session_id || session_id;
 
-      // Hide typing dots
       hideTypingIndicator();
-
-      // Add bot reply
       addMessage("bot", data.reply);
     } catch (error) {
       console.error("Error:", error);
@@ -110,9 +103,13 @@ document.addEventListener("DOMContentLoaded", () => {
   sendBtn.addEventListener("click", sendMessage);
 
   // Send on Enter key
-  userInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
+  userInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
       sendMessage();
     }
   });
+
+  // Optional: focus input on load
+  userInput.focus();
 });

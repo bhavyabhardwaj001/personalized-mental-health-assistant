@@ -4,14 +4,9 @@ from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
-from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
 # ---------- Setup ----------
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))  # just the backend folder
-
-blenderbot_tokenizer = AutoTokenizer.from_pretrained("facebook/blenderbot-400M-distill")
-blenderbot_model = AutoModelForSeq2SeqLM.from_pretrained("facebook/blenderbot-400M-distill")
-blenderbot_model.to("cpu")  # your CPU-only setup
 
 app = Flask(
     __name__,
@@ -25,14 +20,8 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(BASE_DIR, "d
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
-# ---------- Ensure NLTK Data ----------
-try:
-    nltk.data.find("sentiment/vader_lexicon.zip")
-except LookupError:
-    nltk.download("vader_lexicon")
-
 # ---------- Sentiment Analyzer ----------
-sia = SentimentIntensityAnalyzer()
+sia = None
 
 # ---------- Load Predefined Responses ----------
 RESPONSES_FILE = os.path.join(BASE_DIR, "responses.json")
@@ -60,15 +49,19 @@ class Message(db.Model):
     sentiment = db.Column(db.String(20))
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
-def get_blenderbot_reply(user_text):
-    inputs = blenderbot_tokenizer(user_text, return_tensors="pt").to("cpu")
-    reply_ids = blenderbot_model.generate(**inputs, use_cache=False, max_new_tokens=50)
-    bot_reply = blenderbot_tokenizer.decode(reply_ids[0], skip_special_tokens=True)
-    return bot_reply
-
 # ---------- Utils ----------
+def get_sentiment_analyzer():
+    global sia
+    if sia is None:
+        try:
+            nltk.data.find("sentiment/vader_lexicon.zip")
+        except LookupError:
+            nltk.download("vader_lexicon", quiet=True)
+        sia = SentimentIntensityAnalyzer()
+    return sia
+
 def classify_sentiment(text: str):
-    scores = sia.polarity_scores(text)
+    scores = get_sentiment_analyzer().polarity_scores(text)
     c = scores["compound"]
     if c >= 0.3:
         return "positive", c
@@ -123,13 +116,8 @@ def api_message():
     db.session.add(Message(session_id=session_id, role="user", content=text, sentiment=label))
     db.session.commit()
 
-    # Generate bot reply using large predefined responses
-    try:
-        bot_text = get_blenderbot_reply(text)
-    except Exception as e:
-        print("BlenderBot error:", e)
-        bot_text = local_reply(label, session_id=session_id)  # fallback
-
+    # Keep deployed responses fast: avoid loading a large local LLM on startup.
+    bot_text = local_reply(label, session_id=session_id)
 
     # Extra warning for strongly negative
     if label == "strongly_negative":
