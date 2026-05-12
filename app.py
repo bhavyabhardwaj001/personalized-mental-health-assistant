@@ -4,9 +4,11 @@ from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
+from groq import Groq
 
 # ---------- Setup ----------
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))  # just the backend folder
+GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
 
 app = Flask(
     __name__,
@@ -22,6 +24,7 @@ db = SQLAlchemy(app)
 
 # ---------- Sentiment Analyzer ----------
 sia = None
+groq_client = None
 
 # ---------- Load Predefined Responses ----------
 RESPONSES_FILE = os.path.join(BASE_DIR, "responses.json")
@@ -39,6 +42,31 @@ else:
 
 # Track last bot message per session to avoid repetition
 last_bot_messages = {}
+
+CRISIS_MESSAGE = (
+    "I'm really glad you told me. If you might hurt yourself or feel unsafe, "
+    "please contact emergency services right now or reach out to someone near you. "
+    "India: AASRA 24x7 +91 9820466726, iCALL +91 9152987821. "
+    "If you can, move away from anything you could use to hurt yourself and call "
+    "a trusted person to stay with you. You do not have to handle this alone."
+)
+
+SYSTEM_PROMPT = """
+You are MindEase, a warm mental health support chatbot for a student project.
+You are not a therapist, doctor, or emergency service.
+
+Style:
+- Be empathetic, specific, and conversational.
+- Keep replies concise: usually 3 to 6 sentences.
+- Ask one gentle follow-up question when useful.
+- Offer practical coping steps such as breathing, grounding, journaling, reframing, or breaking a problem into small next actions.
+- Do not sound generic or repetitive.
+
+Safety:
+- Never diagnose.
+- Never claim to provide professional treatment.
+- If the user may be in immediate danger or mentions self-harm intent, urge immediate help from local emergency services, a trusted person, or a crisis helpline.
+""".strip()
 
 # ---------- Models ----------
 class Message(db.Model):
@@ -72,6 +100,32 @@ def classify_sentiment(text: str):
     else:
         return "neutral", c
 
+def get_groq_client():
+    global groq_client
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        return None
+    if groq_client is None:
+        groq_client = Groq(api_key=api_key)
+    return groq_client
+
+def has_crisis_language(text: str):
+    lowered = text.lower()
+    crisis_phrases = [
+        "kill myself",
+        "end my life",
+        "suicide",
+        "suicidal",
+        "hurt myself",
+        "harm myself",
+        "self harm",
+        "self-harm",
+        "i want to die",
+        "don't want to live",
+        "dont want to live",
+    ]
+    return any(phrase in lowered for phrase in crisis_phrases)
+
 def local_reply(label, session_id=None):
     """Return a random reply based on sentiment, avoiding repetition."""
     options = responses.get(label, ["I hear you."])
@@ -82,6 +136,44 @@ def local_reply(label, session_id=None):
     if session_id:
         last_bot_messages[session_id] = reply
     return reply
+
+def conversation_history(session_id, limit=8):
+    messages = (
+        Message.query.filter_by(session_id=session_id)
+        .order_by(Message.created_at.desc())
+        .limit(limit)
+        .all()
+    )
+    messages.reverse()
+    history = []
+    for message in messages:
+        role = "assistant" if message.role == "bot" else "user"
+        content = (message.content or "").strip()
+        if content:
+            history.append({"role": role, "content": content[:1200]})
+    return history
+
+def groq_reply(session_id, label):
+    client = get_groq_client()
+    if client is None:
+        return None
+
+    messages = [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {
+            "role": "system",
+            "content": f"The latest sentiment label is {label}. Use it only as a hint, not a diagnosis.",
+        },
+    ]
+    messages.extend(conversation_history(session_id))
+
+    completion = client.chat.completions.create(
+        model=GROQ_MODEL,
+        messages=messages,
+        temperature=0.75,
+        max_tokens=220,
+    )
+    return completion.choices[0].message.content.strip()
 
 # ---------- Routes ----------
 @app.route("/")
@@ -116,12 +208,18 @@ def api_message():
     db.session.add(Message(session_id=session_id, role="user", content=text, sentiment=label))
     db.session.commit()
 
-    # Keep deployed responses fast: avoid loading a large local LLM on startup.
-    bot_text = local_reply(label, session_id=session_id)
+    if has_crisis_language(text):
+        bot_text = CRISIS_MESSAGE
+    else:
+        try:
+            bot_text = groq_reply(session_id, label) or local_reply(label, session_id=session_id)
+        except Exception as e:
+            app.logger.warning("Groq reply failed: %s", e)
+            bot_text = local_reply(label, session_id=session_id)
 
-    # Extra warning for strongly negative
-    if label == "strongly_negative":
-        bot_text += "\n\nIf you’re thinking about harming yourself, please seek immediate help. India: AASRA 24x7 +91 9820466726 • iCALL +91 9152987821 • Local emergency services."
+        # Extra warning for strongly negative messages.
+        if label == "strongly_negative":
+            bot_text += "\n\nIf you're thinking about harming yourself, please seek immediate help. India: AASRA 24x7 +91 9820466726, iCALL +91 9152987821, or local emergency services."
 
     # Save bot message
     db.session.add(Message(session_id=session_id, role="bot", content=bot_text, sentiment=label))
